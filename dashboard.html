@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Horario - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="header-content">
+                <div>
+                    <h1>Control Horario</h1>
+                    <p class="subtitle">Bienvenido, <span id="user-name">Usuario</span></p>
+                </div>
+                <button id="logout-btn" class="btn btn-secondary">
+                    <span>🚪</span> Cerrar Sesión
+                </button>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            
+            <div class="stats-grid">
+                <section class="card stat-card" id="weather-card">
+                    <h3>
+                        <span class="emoji-icon">🌤️</span> 
+                        Clima Actual
+                    </h3>
+                    <div id="weather-widget">
+                        <div class="loading-spinner small"></div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Cargando...</p>
+                    </div>
+                </section>
+
+                <section class="card">
+                     <h3>
+                        <span class="emoji-icon">📊</span>
+                        Resumen del Mes
+                    </h3>
+                    <div id="stats-dashboard">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="card">
+                <h3>
+                    <span class="emoji-icon">⏱️</span> 
+                    Control de Jornada
+                </h3>
+                
+                <div class="current-time-display">
+                    <p class="timer" id="current-time">--:--:--</p>
+                </div>
+                
+                <div id="control-message" class="control-message info">
+                    No hay jornada activa
+                </div>
+                
+                <div class="button-group" style="margin-top: 1.5rem;">
+                    <button id="start-btn" class="btn btn-primary">
+                        ▶️ Iniciar
+                    </button>
+                    <button id="pause-btn" class="btn btn-secondary" disabled>
+                        ⏸️ Pausar
+                    </button>
+                    <button id="end-btn" class="btn btn-danger" disabled>
+                        ⏹️ Finalizar
+                    </button>
+                </div>
+            </section>
+
+            <section class="card">
+                <h3>
+                    <span class="emoji-icon">📋</span> 
+                    Historial Reciente
+                </h3>
+                
+                <div id="loading-history" class="loading-small" style="display: none;">
+                    <div class="spinner-small"></div>
+                    <p>Actualizando lista...</p>
+                </div>
+                
+                <div id="history-list" class="history-list">
+                    </div>
+            </section>
+
+        </main>
+
+        <div id="message" class="message"></div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p style="color: white; margin-top: 1rem;">Procesando...</p>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
+
+    <script src="services/ui-feedback.js"></script>
+    <script src="services/weather-service.js"></script>
+    <script src="services/stats-service.js"></script>
+
+    <script src="app.js"></script>
+
+    <script>
+    // 🛡️ SCRIPT DE SEGURIDAD
+    // Fuerza a quitar el "Cargando..." si se queda pegado más de 1.5 segundos
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const loading = document.getElementById('loading');
+            if (loading) {
+                loading.style.opacity = '0';
+                setTimeout(() => loading.style.display = 'none', 300); // Transición suave
+            }
+        }, 1500); 
+    });
+    </script>
+
+</body>
+</html>

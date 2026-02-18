@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Horario - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>⏰ Control Horario</h1>
+                <div class="user-info">
+                    <span id="user-name">Usuario</span>
+                    <button id="logout-btn" class="btn btn-secondary">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Main Content -->
+        <main class="dashboard">
+            <!-- Current Status Card -->
+            <section class="card status-card">
+                <h2>Estado Actual</h2>
+                <div id="current-status">
+                    <p class="status-text">Sin jornada activa</p>
+                    <p class="status-time" id="current-time">--:--:--</p>
+                </div>
+            </section>
+
+            <!-- Control Buttons -->
+            <section class="card controls-card">
+                <h2>Control de Jornada</h2>
+                <div class="control-buttons">
+                    <button id="start-btn" class="btn btn-success">
+                        ▶️ Iniciar Jornada
+                    </button>
+                    <button id="pause-btn" class="btn btn-warning" disabled>
+                        ⏸️ Pausar Jornada
+                    </button>
+                    <button id="end-btn" class="btn btn-danger" disabled>
+                        ⏹️ Finalizar Jornada
+                    </button>
+                </div>
+                <div id="control-message" class="control-message"></div>
+            </section>
+
+            <!-- History Section -->
+            <section class="card history-card">
+                <h2>📋 Historial de Jornadas</h2>
+                <div id="history-container">
+                    <div id="loading-history" class="loading-small">
+                        Cargando historial...
+                    </div>
+                    <div id="history-list" class="history-list">
+                        <!-- Las jornadas se cargarán aquí dinámicamente -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Procesando...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Horario MVP - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Control Horario</h1>
+            <p class="subtitle">Sistema de Registro de Asistencia</p>
+        </header>
+
+        <div class="auth-container">
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form active">
+                <h2>Iniciar Sesión</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-email">📧 Correo Electrónico</label>
+                        <input 
+                            type="email" 
+                            id="login-email" 
+                            placeholder="tu@email.com" 
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">🔒 Contraseña</label>
+                        <input 
+                            type="password" 
+                            id="login-password" 
+                            placeholder="••••••••" 
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Iniciar Sesión
+                    </button>
+                </form>
+                <p class="form-footer">
+                    ¿No tienes cuenta? 
+                    <a href="#" id="show-signup">Regístrate aquí</a>
+                </p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="auth-form">
+                <h2>Crear Cuenta</h2>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signup-name">👤 Nombre Completo</label>
+                        <input 
+                            type="text" 
+                            id="signup-name" 
+                            placeholder="Diego Hernandez" 
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">📧 Correo Electrónico</label>
+                        <input 
+                            type="email" 
+                            id="signup-email" 
+                            placeholder="tu@email.com" 
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">🔒 Contraseña</label>
+                        <input 
+                            type="password" 
+                            id="signup-password" 
+                            placeholder="Mínimo 6 caracteres" 
+                            minlength="6"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password-confirm">🔒 Confirmar Contraseña</label>
+                        <input 
+                            type="password" 
+                            id="signup-password-confirm" 
+                            placeholder="Repite tu contraseña" 
+                            minlength="6"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Crear Cuenta
+                    </button>
+                </form>
+                <p class="form-footer">
+                    ¿Ya tienes cuenta? 
+                    <a href="#" id="show-login">Inicia sesión aquí</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Loading & Messages -->
+        <div id="message" class="message"></div>
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
+    
+    <script src="services/ui-feedback.js"></script> 
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
