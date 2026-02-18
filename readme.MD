@@ -94,3 +94,10 @@ El sistema sigue una arquitectura **Frontend Monolítico (SPA)** conectado a un 
 - [x] **Integración:** Código en `main` mediante Pull Requests.
 - [x] **Debugging:** Se solucionó el bug de visualización del botón "Pausar" (Commit: `fix: correccion de visibilidad`).
 - [x] **Documentación:** Este README explica arquitectura y uso.
+
+
+### Integración con Supabase
+- [x] **Autenticación:** Signup + Login funcionando con Supabase.
+- [x] **Registro de Jornada:** Se puede Iniciar, Pausar y Finalizar.
+- [x] **Historial:** Listado de registros visible en el Dashboard.
+- [x] **Persistencia:** Los datos se guardan en Supabase (Tablas `jornadas` y `pausas`).
