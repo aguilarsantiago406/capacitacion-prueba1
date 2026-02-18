@@ -7,7 +7,7 @@
 async function initWeather() {
     // NOTA: Para que funcione, debes obtener tu API key de OpenWeatherMap
     const apiKey = '6b9bd12dc4bc142c051fb0fa754f52c8'; // ← Tu API Key
-    const city = 'Lima'; 
+    const city = 'Lima';
 
     const weatherWidget = document.getElementById('weather-widget');
 
@@ -194,6 +194,10 @@ function startClock() {
 
 // Cerrar sesión
 async function handleLogout() {
+    // 1. Preguntar antes de salir (Evita clics por error)
+    const confirmacion = confirm("¿Estás seguro que deseas cerrar sesión?");
+    if (!confirmacion) return; // Si dice "Cancelar", no hacemos nada
+
     const supabase = window.getSupabase();
     if (!supabase) return;
 
@@ -202,7 +206,12 @@ async function handleLogout() {
         window.location.href = 'index.html';
     } catch (error) {
         console.error('Error al cerrar sesión:', error);
-        showMessage('error', 'Error al cerrar sesión');
+        // Usamos el sistema de mensajes si existe, si no, alert
+        if (window.uiFeedback) {
+            uiFeedback.error('Error al cerrar sesión');
+        } else {
+            alert('Error al cerrar sesión');
+        }
     }
 }
 
@@ -233,7 +242,7 @@ async function loadCurrentWorkday() {
 
         if (data && data.length > 0) {
             currentWorkday = data[0];
-            
+
             // 2. NUEVO: Verificar si hay una pausa activa para esta jornada
             const { data: pauseData } = await supabase
                 .from('pausas')
@@ -310,7 +319,7 @@ async function handlePauseWorkday() {
 
         if (currentPause) {
             // --- CASO 1: YA ESTAMOS PAUSADOS -> TOCA REANUDAR ---
-            
+
             // Cerrar la pausa actual en BD
             const { error } = await supabase
                 .from('pausas')
@@ -322,14 +331,14 @@ async function handlePauseWorkday() {
             // Actualizar estado local y UI
             currentPause = null;
             showMessage('success', '▶️ Jornada reanudada');
-            
+
         } else {
             // --- CASO 2: ESTAMOS TRABAJANDO -> TOCA PAUSAR ---
-            
+
             // Crear nueva pausa en BD
             const { data, error } = await supabase
                 .from('pausas')
-                .insert([{ 
+                .insert([{
                     jornada_id: currentWorkday.id,
                     inicio: now
                 }])
@@ -497,15 +506,15 @@ function updateUIForActiveWorkday() {
     if (currentPause) {
         // --- ESTADO: PAUSADO ---
         showControlMessage('warning', '⏸️ Jornada Pausada');
-        
+
         // Cambiar botón a "Reanudar"
         pauseBtn.innerHTML = '▶️ Reanudar';
         pauseBtn.className = 'btn btn-primary'; // Azul para acción positiva
-        
+
     } else {
         // --- ESTADO: TRABAJANDO ---
         showControlMessage('success', `🟢 Jornada activa desde ${startTimeStr}`);
-        
+
         // Cambiar botón a "Pausar"
         pauseBtn.innerHTML = '⏸️ Pausar';
         pauseBtn.className = 'btn btn-secondary'; // Gris/Blanco para acción secundaria
@@ -515,12 +524,12 @@ function updateUIForActiveWorkday() {
 // Actualizar UI para sin jornada
 function updateUIForNoWorkday() {
     startBtn.disabled = false;
-    
+
     // Deshabilitar pausa si no hay jornada
     pauseBtn.disabled = true;
     pauseBtn.innerHTML = '⏸️ Pausar';
     pauseBtn.className = 'btn btn-secondary';
-    
+
     endBtn.disabled = true;
     showControlMessage('info', 'No hay jornada activa');
 }
