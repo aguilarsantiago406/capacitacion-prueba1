@@ -1,0 +1,222 @@
+/* =========================================
+   DISEÑO PRO: CELESTE & AZUL (CORREGIDO)
+   ========================================= */
+
+:root {
+    /* Paleta de Colores Fresca */
+    --bg-body: #F0F9FF;       /* Fondo general (Celeste muy pálido) */
+    --bg-card-blue: #E0F2FE;  /* CELESTE (Sky-100) para tarjetas */
+    --bg-white: #FFFFFF;      /* Blanco para detalles */
+    
+    /* Textos */
+    --text-main: #0C4A6E;     /* Azul petróleo oscuro para títulos */
+    --text-body: #334155;     /* Gris azulado oscuro para lectura */
+    --text-muted: #64748B;    /* Gris medio */
+
+    /* Botones y Acentos */
+    --primary: #0284C7;       /* Azul Celeste Fuerte (Sky-600) */
+    --primary-hover: #0369A1; /* Azul más oscuro al pasar mouse */
+    --danger: #EF4444;        /* Rojo */
+    
+    /* Estructura */
+    --radius: 16px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-body);
+    line-height: 1.6;
+    padding-bottom: 50px;
+}
+
+/* CONTENEDOR */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* HEADER (CABECERA) - Aquí movemos el botón */
+.header {
+    margin-bottom: 30px;
+    padding: 20px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; /* EMPUJA EL BOTÓN A LA DERECHA */
+    align-items: center; 
+    gap: 20px;
+}
+
+.header h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+
+.subtitle { 
+    color: var(--text-muted); 
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* TARJETAS (FONDO CELESTE) */
+.card {
+    background-color: var(--bg-card-blue); /* Fondo Celeste */
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: var(--shadow);
+    border: 1px solid #BAE6FD; /* Borde celeste */
+    margin-bottom: 25px;
+    transition: transform 0.2s;
+}
+
+.card:hover { transform: translateY(-3px); }
+
+/* Títulos de tarjeta */
+.card h3 {
+    color: var(--text-main);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(255,255,255,0.6);
+    padding-bottom: 10px;
+}
+
+/* RELOJ GIGANTE */
+.control-card-highlight {
+    background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
+    border: 2px solid var(--primary);
+}
+
+.timer {
+    font-size: 5rem;
+    font-weight: 800;
+    color: #0C4A6E; /* Azul muy oscuro */
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    margin: 15px 0;
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+}
+
+.control-message {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.6);
+    border-radius: 8px;
+    color: var(--text-main);
+}
+
+/* BOTONES */
+.button-group { display: flex; justify-content: center; gap: 15px; }
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 0 #026AA7;
+}
+.btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+.btn-primary:active { transform: translateY(2px); box-shadow: none; }
+
+.btn-danger {
+    background: #FEE2E2; color: var(--danger);
+    border: 2px solid #FCA5A5;
+}
+.btn-danger:hover:not(:disabled) { background: var(--danger); color: white; border-color: var(--danger); }
+
+.btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; transform: none; }
+
+/* Botón Cerrar Sesión */
+#logout-btn {
+    background: white;
+    color: var(--text-muted);
+    border: 1px solid #CBD5E1;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+#logout-btn:hover {
+    background: #F1F5F9;
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+/* ICONOS */
+.emoji-icon {
+    font-size: 1.5rem;
+    background: white;
+    width: 40px; height: 40px;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* HISTORIAL (Fondo blanco para leer bien) */
+.history-item {
+    display: flex; justify-content: space-between; padding: 15px;
+    background: white; 
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--primary);
+}
+.history-date { color: var(--text-main); font-weight: 700; }
+
+/* ESTADÍSTICAS */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.stat-value { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
+
+/* =========================================
+   FIX DEL "CARGANDO..." (IMPORTANTE)
+   ========================================= */
+/* Esto arregla el texto suelto abajo */
+.loading-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 9999;
+}
+.loading-overlay.hidden { display: none; } /* Esto lo oculta cuando termina */
+
+.spinner {
+    width: 40px; height: 40px;
+    border: 4px solid #BAE6FD;
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Estilo para el loading estático también */
+#loading {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 9999;
+}
